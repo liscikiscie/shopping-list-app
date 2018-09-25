@@ -19,10 +19,13 @@
         </div>
         <ShopItems
                 v-for="(item, key) in items"
-                :item="item"
+                :key="item.id"
+                :purchased="item.purchased"
+                :label="item.label"
                 :items="items"
-                @remove-item="removeItem"
+                @removeElement="removeItem(key)"
         />
+        <p v-if="items.length === 0"> Your list is empty</p>
     </div>
 </template>
 
@@ -62,17 +65,15 @@
                 this.items.push({
                     label: this.newItem,
                     purchased: false,
-                    id: this.id
+                    id: this.id()
                 });
                 this.newItem = '';
             },
             id: function () {
                 return Math.floor((Math.random() * 100) + 1);
             },
-            removeItem: function ( key ) {
-                console.log('chuj');
-                this.$delete(this.item, key);
-
+            removeItem: function (key) {
+                this.$delete(this.items, key);
             }
         }
     };
