@@ -1,7 +1,7 @@
 <template>
     <div class="shop-items">
         <div class="single-item">
-            <p>{{ this.label }}</p>
+            <p @click="togglePurchase" class="item" :class="{strikeout: this.purchase}">{{ this.label }}</p>
             <button class="removeButton" @click="removeItem">Remove</button>
         </div>
     </div>
@@ -18,7 +18,8 @@
         },
         data() {
             return {
-                shopList: this.items
+                shopList: this.items,
+                purchase: this.purchased
             }
         },
         methods:
@@ -31,12 +32,11 @@
                     };
                     this.$emit(
                         'removeElement', this.item);
+                },
+                togglePurchase: function () {
+                    this.purchase = !this.purchase;
                 }
-            },
-        created() {
-            console.log(this.shopList);
-            console.log('chuj');
-        }
+            }
     };
     export default ShopItems;
 </script>
@@ -66,9 +66,18 @@
 
         .single-item {
             display: flex;
-            justify-content: flex-start;
             align-items: center;
             flex-direction: row;
+            justify-content: flex-start;
+
+            .item {
+                cursor: pointer;
+            }
+
+            .strikeout {
+                color: orange;
+                text-decoration: line-through;
+            }
         }
     }
 </style>

@@ -62,7 +62,7 @@
         },
         methods: {
             addItemToList: function () {
-                this.items.push({
+                this.items.unshift({
                     label: this.newItem,
                     purchased: false,
                     id: this.id()
@@ -72,7 +72,7 @@
             id: function () {
                 return Math.floor((Math.random() * 100) + 1);
             },
-            removeItem: function (key) {
+            removeItem: function ( key ) {
                 this.$delete(this.items, key);
             }
         }
