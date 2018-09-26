@@ -1,4 +1,4 @@
-# shopping-list-app
+Simple shop App created in Vue.js
 
 ## Project setup
 ```
